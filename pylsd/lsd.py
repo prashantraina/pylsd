@@ -15,9 +15,11 @@ def lsd(src):
     temp = os.path.abspath(str(np.random.randint(
         1, 1000000)) + 'ntl.txt').replace('\\', '/')
 
+    print("About to create temp file: ", temp)
+
     lens = len(src)
     src = (ctypes.c_double * lens)(*src)
-    lsdlib.lsdGet(src, ctypes.c_int(rows), ctypes.c_int(cols), temp)
+    lsdlib.lsdGet(src, ctypes.c_int(rows), ctypes.c_int(cols), temp.encode('ascii'))
 
     fp = open(temp, 'r')
     cnt = fp.read().strip().split(' ')
